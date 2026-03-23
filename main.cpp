@@ -121,7 +121,6 @@ public:
     float getWidth() const { return width;}
     float getHeight() const { return height;}
     int getPoints() const { return points;}
-    std::string getType() const { return type;}
 
 
     friend std::ostream& operator<<(std::ostream& os, const Brick& brick) {
