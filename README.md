@@ -1,6 +1,6 @@
 # Ricochet
 
-## Un joc arcade de tip Breakout/survival în care controlezi o bară (paddle) și nu lași bilele să cadă. Cu fiecare wave distrusă, dificultatea crește — apar mai multe bile, ## cărămizi speciale (rezistente, explozive) și power-ups care modifică gameplay-ul (mărire bară, multi-ball, slow motion). Scopul este să supraviețuiești cât mai multe wave-## uri și să acumulezi scorul maxim.
+## Un joc arcade de tip Breakout/survival în care controlezi o bară (paddle) și nu lași bilele să cadă. Cu fiecare wave trecut, dificultatea crește și apar mai multe bile, cărămizi speciale (rezistente, explozive) și power-ups care modifică gameplay-ul (mărire bară, multi-ball, slow motion). Scopul este să supraviețuiești cât mai multe wave- uri și să acumulezi scorul maxim.
 
 ### Folosiți template-ul corespunzător grupei voastre!
 
