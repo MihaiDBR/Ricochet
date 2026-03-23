@@ -1,1 +1,5 @@
 ext/** linguist-vendored
+*.sh linguist-vendored
+*.cmake linguist-vendored
+scripts/** linguist-vendored
+cmake/** linguist-vendored
