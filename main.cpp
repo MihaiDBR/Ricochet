@@ -122,6 +122,8 @@ public:
     float getHeight() const { return height;}
     int getPoints() const { return points;}
 
+    // de adaugat iar GetType
+
 
     friend std::ostream& operator<<(std::ostream& os, const Brick& brick) {
         os << "Brick " << "[" << "x=" << brick.x << ", y=" << brick.y << ", width=" << brick.width <<
