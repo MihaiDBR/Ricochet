@@ -17,6 +17,6 @@ public:
     [[nodiscard]] float getWidth() const;
     [[nodiscard]] float getHeight() const;
     [[nodiscard]] int getPoints() const;
-    [[nodiscard]] const std::string& getType() const;
+    // [[nodiscard]] const std::string& getType() const;
     friend std::ostream& operator<<(std::ostream& os, const Brick& brick);
 };
