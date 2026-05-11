@@ -15,7 +15,7 @@ float Brick::getY() const { return y; }
 float Brick::getWidth() const { return width; }
 float Brick::getHeight() const { return height; }
 int Brick::getPoints() const { return points; }
-const std::string& Brick::getType() const { return type; }
+// const std::string& Brick::getType() const { return type; }
 
 std::ostream& operator<<(std::ostream& os, const Brick& brick) {
     os << "Brick [x=" << brick.x << ", y=" << brick.y
