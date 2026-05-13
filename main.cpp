@@ -52,5 +52,7 @@ int main() {
         std::cout << e.what() << std::endl;
     }
 
+    std::cout << "Au fost create: " << Brick::getTotBricks() << " nr de brick-uri" << std::endl;
+
     return 0;
 }
