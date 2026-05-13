@@ -1,5 +1,10 @@
 #include "Game.h"
+#include "NormalBrick.h"
+#include "HardBrick.h"
+#include "ExplosiveBrick.h"
 #include <algorithm>
+
+#include "GameException.h"
 
 Game::Game(float screenWidth, float screenHeight, int lives)
     : paddle(screenWidth / 2 - 60, screenHeight - 30, 12, 120, 7),
@@ -9,31 +14,40 @@ Game::Game(float screenWidth, float screenHeight, int lives)
       screenWidth(screenWidth),
       screenHeight(screenHeight)
 {
+    if (screenWidth < 0 || screenHeight < 0)
+        throw ConfigGresit("Ecran prea mic");
+    if (lives <= 0)
+        throw ConfigGresit("Nu mai ai suficiente vieti sa continui");
     balls.push_back(Ball(screenWidth / 2, screenHeight - 50, 3, -3, 6));
 }
 
 Game::Game(const Game& other)
     : paddle(other.paddle),
       balls(other.balls),
-      bricks(other.bricks),
       score(other.score),
       lives(other.lives),
       wave(other.wave),
       screenWidth(other.screenWidth),
       screenHeight(other.screenHeight)
 {
+    for (const auto& brick : other.bricks) {
+        bricks.push_back(std::unique_ptr<Brick>(brick->clone()));
+    }
     std::cout << "Constructor de copiere al lui Game" << std::endl;
 }
 
 Game& Game::operator=(const Game& other) {
-    paddle = other.paddle;
-    balls = other.balls;
-    bricks = other.bricks;
-    score = other.score;
-    lives = other.lives;
-    wave = other.wave;
-    screenWidth = other.screenWidth;
-    screenHeight = other.screenHeight;
+    if (this != &other) {
+        Game temporar(other);
+        std::swap(paddle, temporar.paddle);
+        std::swap(balls, temporar.balls);
+        std::swap(bricks, temporar.bricks);
+        std::swap(score, temporar.score);
+        std::swap(lives, temporar.lives);
+        std::swap(wave, temporar.wave);
+        std::swap(screenWidth, temporar.screenWidth);
+        std::swap(screenHeight, temporar.screenHeight);
+    }
     std::cout << "Operator = copiere pentru Game" << std::endl;
     return *this;
 }
@@ -61,12 +75,19 @@ void Game::spawnWave() {
             float x = offsetX + c * (brickWidth + gap);
             float y = 40 + r * (brickHeight + gap);
             if (wave > 1 && (r * cols + c) % 3 == 0) {
-                bricks.push_back(Brick(x, y, brickWidth, brickHeight, 20, 2, "hard"));
-            } else {
-                bricks.push_back(Brick(x, y, brickWidth, brickHeight, 10, 1, "normal"));
+                bricks.push_back(std::make_unique<HardBrick>(x, y, brickWidth, brickHeight));
+            } else if (wave > 2 && (r * cols + c) % 5 == 0) {
+                bricks.push_back(std::make_unique<ExplosiveBrick>(x, y, brickWidth, brickHeight));
+            }
+            else {
+                bricks.push_back(std::make_unique<NormalBrick>(x, y, brickWidth, brickHeight));
             }
         }
     }
+}
+
+const std::vector<std::unique_ptr<Brick>>& Game::getBricks() const {
+    return bricks;
 }
 
 void Game::checkCollisions() {
@@ -90,13 +111,13 @@ void Game::checkCollisions() {
             ball.bounceY();
 
         for (auto& brick : bricks) {
-            if (ball.getX() + ball.getRadius() > brick.getX() &&
-                ball.getX() - ball.getRadius() < brick.getX() + brick.getWidth() &&
-                ball.getY() + ball.getRadius() > brick.getY() &&
-                ball.getY() - ball.getRadius() < brick.getY() + brick.getHeight()) {
+            if (ball.getX() + ball.getRadius() > brick->getX() &&
+                ball.getX() - ball.getRadius() < brick->getX() + brick->getWidth() &&
+                ball.getY() + ball.getRadius() > brick->getY() &&
+                ball.getY() - ball.getRadius() < brick->getY() + brick->getHeight()) {
                 ball.bounceY();
-                if (brick.hit()) {
-                    score += brick.getPoints();
+                if (brick->hitOn()) {
+                    score += brick->getPoints();
                 }
                 break;
             }
@@ -104,7 +125,7 @@ void Game::checkCollisions() {
     }
     bricks.erase(
         std::remove_if(bricks.begin(), bricks.end(),
-            [](const Brick& b) { return b.isDestroyed(); }),
+            [](const std::unique_ptr<Brick>& b) { return b->isDestroyed(); }),
         bricks.end());
 }
 
@@ -127,7 +148,7 @@ std::ostream& operator<<(std::ostream& os, const Game& game) {
         os << ball << std::endl;
     }
     for (const auto& brick : game.bricks) {
-        os << brick << std::endl;
+        os << *brick << std::endl;
     }
     return os;
 }

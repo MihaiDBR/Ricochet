@@ -3,20 +3,23 @@
 #include <string>
 
 class Brick {
-private:
+protected:
     float x, y, width, height;
     int points, hp;
-    std::string type;
+    virtual void afisare(std::ostream& os) const;
 
 public:
-    Brick(float x, float y, float width, float height, int points, int hp, const std::string& type);
-    bool hit();
+    Brick(float x, float y, float width, float height, int points, int hp);
+    virtual ~Brick() = default;
+    virtual bool hitOn();
+    virtual std::string getType() const = 0;
+    virtual Brick* clone() const =0;
+
     [[nodiscard]] bool isDestroyed() const;
     [[nodiscard]] float getX() const;
     [[nodiscard]] float getY() const;
     [[nodiscard]] float getWidth() const;
     [[nodiscard]] float getHeight() const;
     [[nodiscard]] int getPoints() const;
-    // [[nodiscard]] const std::string& getType() const;
     friend std::ostream& operator<<(std::ostream& os, const Brick& brick);
 };

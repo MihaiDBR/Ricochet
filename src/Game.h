@@ -3,13 +3,14 @@
 #include "Ball.h"
 #include "Brick.h"
 #include <vector>
+#include <memory>
 #include <iostream>
 
 class Game {
 private:
     Paddle paddle;
     std::vector<Ball> balls;
-    std::vector<Brick> bricks;
+    std::vector<std::unique_ptr<Brick>> bricks;
     int score;
     int lives;
     int wave;
@@ -27,4 +28,5 @@ public:
     void moveRight();
     void update();
     friend std::ostream& operator<<(std::ostream& os, const Game& game);
+    const std::vector<std::unique_ptr<Brick>>& getBricks() const;
 };

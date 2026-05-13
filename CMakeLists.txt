@@ -55,6 +55,13 @@ add_executable(${MAIN_EXECUTABLE_NAME}
     src/Ball.cpp
     src/Brick.cpp
     src/Game.cpp
+        src/NormalBrick.cpp
+        src/NormalBrick.h
+        src/HardBrick.cpp
+        src/HardBrick.h
+        src/ExplosiveBrick.cpp
+        src/ExplosiveBrick.h
+        src/GameException.h
 )
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
 # NOTE: RUN_SANITIZERS is optional, if it's not present it will default to true
