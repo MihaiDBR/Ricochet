@@ -9,4 +9,4 @@ public:
     bool hitOn() override;
     std::string getType() const override;
     Brick* clone() const override;
-}
+};
