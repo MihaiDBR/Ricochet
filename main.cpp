@@ -17,9 +17,9 @@ int main() {
 
         //Ver Dynamic_cast ca fct
         for (const auto& brick : g1.getBricks()) {
-            if (auto* hard = dynamic_cast<HardBrick*> (brick.get())) {
+            if (auto* hard = dynamic_cast<const HardBrick*> (brick.get())) {
                 std::cout << "Am gasit un HardBrick la x=" << hard->getX() << std::endl;
-            } else if (auto* explosive = dynamic_cast<ExplosiveBrick*> (brick.get())) {
+            } else if (auto* explosive = dynamic_cast<const ExplosiveBrick*> (brick.get())) {
                 std::cout << "Am gasit un ExplosiveBrick la x=" <<explosive->getX() << std::endl;
             }
         }

@@ -6,7 +6,7 @@ class GameException : public std::exception {
 protected:
     std::string mesaj;
 public:
-    explicit GameException(std::string msj) : mesaj(msj) {}
+    explicit GameException(const std::string& msj) : mesaj(msj) {}
     const char* what() const noexcept override {
         return mesaj.c_str(); //convertim pt compatibilitate cu what
     }
