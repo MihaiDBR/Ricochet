@@ -2,9 +2,11 @@
 #include "NormalBrick.h"
 #include "HardBrick.h"
 #include "ExplosiveBrick.h"
+#include "GameException.h"
+#include "InvisibleBrick.h"
 #include <algorithm>
 
-#include "GameException.h"
+
 
 Game::Game(float screenWidth, float screenHeight, int lives)
     : paddle(screenWidth / 2 - 60, screenHeight - 30, 12, 120, 7),
@@ -78,8 +80,9 @@ void Game::spawnWave() {
                 bricks.push_back(std::make_unique<HardBrick>(x, y, brickWidth, brickHeight));
             } else if (wave > 2 && (r * cols + c) % 5 == 0) {
                 bricks.push_back(std::make_unique<ExplosiveBrick>(x, y, brickWidth, brickHeight));
-            }
-            else {
+            } else if (wave > 3 && (r * cols + c) % 7 == 0) {
+                bricks.push_back(std::make_unique<InvisibleBrick>(x, y, brickWidth, brickHeight));
+            } else {
                 bricks.push_back(std::make_unique<NormalBrick>(x, y, brickWidth, brickHeight));
             }
         }
