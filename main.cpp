@@ -60,6 +60,9 @@ int main() {
         std::cout << "High score: " << gm.getHighScore() << std::endl;
         std::cout << gm << std::endl;
 
+        std::cout << "Jocuri jucate: " << gm.getTotalGamesPlayed() << std::endl;
+        std::cout << "Jucator: " << gm.getPlayerName() << std::endl;
+
         // Factory pattern
         auto brickTest = BrickFactory::create("hard", 100, 50, 60, 20);
         std::cout << "Factory a creat: " << *brickTest << std::endl;
@@ -83,6 +86,9 @@ int main() {
         int scorTop = poolScoruri.preia();
         std::cout << "Scor preluat din pool: " << scorTop << std::endl;
         std::cout << "Pool scoruri: " << poolScoruri << std::endl;
+
+        std::cout << "Bile disponibile: " << poolBile.getDisponibile() << std::endl;
+        std::cout << "Bile active: " << poolBile.getActive() << std::endl;
 
         // Functie template clamp - instantiere cu float
         float pozitieX = 750.0f;
