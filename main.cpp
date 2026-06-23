@@ -72,6 +72,8 @@ int main() {
         Ball bilaPrimita = poolBile.preia();
         std::cout << "Bila preluata: " << bilaPrimita << std::endl;
         std::cout << "Pool dupa preluare: " << poolBile << std::endl;
+        poolBile.returneaza(bilaPrimita);
+        std::cout << "Pool dupa returnare: " << poolBile << std::endl;
 
         // ObjectPool<int> - a doua instantiere template
         ObjectPool<int> poolScoruri(10);
