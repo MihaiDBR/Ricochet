@@ -64,6 +64,12 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         src/GameException.h
         src/InvisibleBrick.cpp
         src/InvisibleBrick.h
+        src/BrickFactory.cpp
+        src/BrickFactory.h
+        src/GameManager.cpp
+        src/GameManager.h
+        src/ObjectPool.h
+        src/Utils.h
 )
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
 # NOTE: RUN_SANITIZERS is optional, if it's not present it will default to true

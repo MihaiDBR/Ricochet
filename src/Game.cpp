@@ -1,9 +1,6 @@
 #include "Game.h"
-#include "NormalBrick.h"
-#include "HardBrick.h"
-#include "ExplosiveBrick.h"
+#include "BrickFactory.h"
 #include "GameException.h"
-#include "InvisibleBrick.h"
 #include <algorithm>
 
 
@@ -77,13 +74,13 @@ void Game::spawnWave() {
             float x = offsetX + c * (brickWidth + gap);
             float y = 40 + r * (brickHeight + gap);
             if (wave > 1 && (r * cols + c) % 3 == 0) {
-                bricks.push_back(std::make_unique<HardBrick>(x, y, brickWidth, brickHeight));
+                bricks.push_back(BrickFactory::create("hard", x, y, brickWidth, brickHeight));
             } else if (wave > 2 && (r * cols + c) % 5 == 0) {
-                bricks.push_back(std::make_unique<ExplosiveBrick>(x, y, brickWidth, brickHeight));
+                bricks.push_back(BrickFactory::create("explosive", x, y, brickWidth, brickHeight));
             } else if (wave > 3 && (r * cols + c) % 7 == 0) {
-                bricks.push_back(std::make_unique<InvisibleBrick>(x, y, brickWidth, brickHeight));
+                bricks.push_back(BrickFactory::create("invisible", x, y, brickWidth, brickHeight));
             } else {
-                bricks.push_back(std::make_unique<NormalBrick>(x, y, brickWidth, brickHeight));
+                bricks.push_back(BrickFactory::create("normal", x, y, brickWidth, brickHeight));
             }
         }
     }

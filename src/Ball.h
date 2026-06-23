@@ -13,6 +13,8 @@ public:
     void bounceY();
     void reset(float newX, float newY);
 
+    bool operator==(const Ball& other) const;
+
     float getX() const;
     float getY() const;
     float getRadius() const;

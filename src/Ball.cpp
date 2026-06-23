@@ -29,6 +29,10 @@ float Ball::getY() const { return y; }
 float Ball::getRadius() const { return radius; }
 float Ball::getDy() const { return dy; }
 
+bool Ball::operator==(const Ball& other) const {
+    return x == other.x && y == other.y && dx == other.dx && dy == other.dy && radius == other.radius;
+}
+
 std::ostream& operator<<(std::ostream& os, const Ball& ball) {
     os << "Ball [x=" << ball.x
        << ", y=" << ball.y

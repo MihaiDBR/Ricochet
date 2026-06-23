@@ -20,6 +20,7 @@ float Brick::getHeight() const { return height; }
 int Brick::getPoints() const { return points; }
 int Brick::getTotBricks() { return TotBricks; }
 
+
 void Brick::afisare(std::ostream& os) const {
     os << "Brick are [type: " << getType() <<
         ", x: " << x << ", y: " << y <<
